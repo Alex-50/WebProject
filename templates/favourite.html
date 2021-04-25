@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block content %}
+<p class="h1 text-center">Избранные экскурсии пользователя: {{user.name}} {{user.surname}}</p>
+{% if current_user.favourite == '' %}
+<p class="h2 text-center" style="margin-top: 30px;">Вы пока не добавили в избранное ни одной экскурсии</p>
+{% else %}
+{% for item in lst %}
+{% if item[2] in current_user.favourite %}
+<div>
+    <a href="/tours/{{item[0].id}}"><p class="h2 text-center">{{item[0].name}}</p></a>
+    <p class="h3">Цена: от {{item[0].cost}}р. за человека</p>
+    <p class="h3">Дата: {{item[0].date}}</p>
+    <p class="h3">Организатор: {{item[1].surname}} {{item[1].name}}</p>
+    <p class="h3">По вопросам обращаться по адресу: {{item[1].email}}</p>
+    <div style="margin:0; padding:0;" class="d">
+        <a href="/tours/favourite_delete/{{user.id}}/{{item[0].id}}" style="margin:0;" class="btn btn-outline-dark rounded mx-auto d-block">
+            Удалить из избранного
+        </a>
+    </div>
+</div>
+{% endif %}
+{% endfor %}
+{% endif %}
+{% endblock %}

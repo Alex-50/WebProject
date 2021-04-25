@@ -1,0 +1,54 @@
+{% extends "base.html" %}
+
+{% block content %}
+<p class="text-center">
+    <a class="h1" style="text-indent: 300px;">Список доступных экскурсий</a><a class="btn btn-outline-dark"
+                                                                               style="margin-left:50px; margin-top: 0;"
+                                                                               href="/tours/add_tour">Добавить
+    экскурсию</a></p>
+
+
+<p class="text-center">
+    <a class="h4">Сортировать по:</a>
+    <a class="btn btn-outline-dark b" href="/tours/sort/max">
+        Цене
+    </a>
+    <a class="btn btn-outline-dark b" href="/tours/sort/min">
+        Убыванию цены
+    </a>
+    <a class="btn btn-outline-dark b" href="/tours/sort/date">
+        Дате начала
+    </a>
+</p>
+{% for item in lst %}
+<div>
+    {% if item[2] in current_user.favourite %}
+    <p class="h4 text-right" style="color: #5fa7fa; margin:0; padding:0;">В избранном</p>
+    <a href="/tours/{{item[0].id}}"><p class="h2 text-center">{{item[0].name}}</p></a>
+    <div style="margin:0; padding:0;" class="d">
+        <a href="/favourite_delete/{{current_user.id}}/{{item[0].id}}" style="margin:0;" class="btn btn-outline-dark">
+            Удалить из избранного
+        </a>
+    </div>
+    {% else %}
+    <a href="/tours/{{item[0].id}}"><p class="h2 text-center">{{item[0].name}}</p></a>
+    <a href="/tours/add_favourite/{{current_user.id}}/{{item[0].id}}"
+       class="btn btn-outline-dark rounded mx-auto d-block">Добавить в избранное</a>
+    {% endif %}
+    <p class="h3">Цена: от {{item[0].cost}}р. за человека</p>
+    <p class="h3">Дата: {{item[0].date}}</p>
+    <p class="h3">Организатор: {{item[1].surname}} {{item[1].name}}</p>
+    <p class="h3">По вопросам обращаться по адресу: {{item[1].email}}</p>
+    {% if current_user.is_authenticated and current_user.id == item[0].user %}
+    <div style="margin:0; padding:0;" class="d">
+        <a href="/tours/tours_edit/{{item[0].id}}" style="margin:0;" class="btn btn-outline-dark">
+            Изменить
+        </a>
+        <a href="/tours/tours_delete/{{item[0].id}}" style="margin:0;" class="btn btn-outline-dark">
+            Удалить
+        </a>
+    </div>
+    {% endif %}
+</div>
+{% endfor %}
+{% endblock %}

@@ -1,0 +1,36 @@
+div {
+    background-color: #edfdff;
+    padding: 30px;
+    margin: 50px;
+    border: 4px double black;
+}
+
+.d {
+    border: 0;
+}
+
+.m {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    background-color: white;
+}
+
+a {
+    color: #008cff;
+    font-weight: 600;
+}
+
+.b {
+    margin: 0;
+}
+
+p {
+  font-family: cursive;
+}
+
+.btn {
+    margin: 20px;
+    font-family: cursive;
+}
+

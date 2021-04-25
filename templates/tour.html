@@ -1,0 +1,23 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div>
+    <p></p>
+    <p class="h1 text-center">{{tour.name}}</p>
+    <p class="h3 text-center">{{tour.about}}</p>
+    <table class="table">
+        <tr>
+            <td>
+                <img src="/{{file}}" class="rounded mx-auto d-block" alt="Фото не загрузилось">
+            </td>
+            <td>
+                <p class="h2 text-left" style="font-weight: 600;">Метки:</p>
+                {% for item in lst %}
+                <p class="h3 text-left">{{loop.index}}. {{item}}</p>
+                {% endfor %}
+            </td>
+        </tr>
+    </table>
+    <p class="h2 text-right">Цена всего от {{tour.cost}}р. за человека!</p>
+</div>
+{% endblock %}
