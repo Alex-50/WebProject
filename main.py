@@ -146,6 +146,7 @@ def reqister():
         user.age = form.age.data
         user.created_date = datetime.datetime.now()
         user.set_password(form.password.data)
+        user.favourite = " "
         db_sess.add(user)
         db_sess.commit()
         return redirect('/login')
